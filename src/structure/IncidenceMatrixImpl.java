@@ -24,7 +24,7 @@ public class IncidenceMatrixImpl implements IncidenceMatrix {
 
             matrix.keySet().forEach((v) -> {
                 if (v.label().equals(labels[0]) || v.label().equals(labels[1]))
-                    //todo problema com a primeira entrada, el
+                    //todo problema com dupla adição
                     matrix.get(v).add( (v.label().equals(labels[0]) ? b1 : b2));
 
                 else
@@ -47,23 +47,38 @@ public class IncidenceMatrixImpl implements IncidenceMatrix {
 
     //transformar para addVertice
     private void checkVertice(String[] labels) {
-        List<Vertice> l = matrix.keySet().stream()
+        List<Vertice> verticeList = matrix.keySet().stream()
                 .filter(v -> v.label().equals(labels[0]) || v.label().equals(labels[1])).toList();
-        if(l.isEmpty()) {
-            matrix.put(new Vertice(labels[0]), new ArrayList<>());
-            matrix.put(new Vertice(labels[1]), new ArrayList<>());
+        if(verticeList.isEmpty()) {
+            int size = matrix.isEmpty() ? 0 : matrix.size();
+            List<Byte> newList1 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
+            List<Byte> newList2 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
+
+            matrix.put(new Vertice(labels[0]), newList1);
+            matrix.put(new Vertice(labels[1]), newList2);
             return;
         }
-        if(l.size() != 2)
-            matrix.put( new Vertice(l.getFirst().label()
-                    .equals(labels[0])? labels[1] : labels[0]), new ArrayList<>(Collections.nCopies(matrix.size()-1, (byte) 0)));
+
+        if(verticeList.size() != 2) {
+            Vertice v = verticeList.getFirst();
+            String label = (v.label().equals(labels[0]) ? labels[1] : labels[0]);
+            int size = ((matrix.get(v).size()));
+
+            matrix.put(new Vertice(label),
+                    new ArrayList<>(Collections.nCopies(size, (byte) 0)));
+        }
     }
 
     @Override
     public String toString() {
-        return "IncidenceMatrixImpl{" +
-                "matrix=" + matrix +
-                '}';
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("IncidenceMatrixImpl{");
+        matrix.forEach((v,l)-> {
+            sb.append("\n" + v.label() + l + "\t " + l.size());
+        });
+        sb.append("\n}");
+        return  sb.toString();
     }
 
 }
