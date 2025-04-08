@@ -13,8 +13,7 @@ public class IncidenceMatrixImpl implements IncidenceMatrix {
         matrix = new HashMap<>();
     }
 
-//mudar esse nome, pois fica ambiguo
-    // todo estou contanod com a possibilidade dele já ser cadastrado, tenho que ver quando ele ainda for add
+//todo mudar esse nome, pois fica ambiguo
     @Override
     public void addVertice(String input, byte b1, byte b2) {
         try {
