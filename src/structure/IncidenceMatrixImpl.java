@@ -49,7 +49,10 @@ public class IncidenceMatrixImpl implements IncidenceMatrix {
         List<Vertice> verticeList = matrix.keySet().stream()
                 .filter(v -> v.label().equals(labels[0]) || v.label().equals(labels[1])).toList();
         if(verticeList.isEmpty()) {
-            int size = matrix.isEmpty() ? 0 : matrix.size();
+            //se for vazio, não entre, caso contrário, imite o tamanho dos que já existem
+            int size =  matrix.size() == 0 ?
+                    matrix.size() :
+                    matrix.values().stream().findFirst().get().size();
             List<Byte> newList1 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
             List<Byte> newList2 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
 
