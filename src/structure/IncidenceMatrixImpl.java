@@ -5,7 +5,7 @@ import graph.Vertice;
 
 import java.util.*;
 
-public class IncidenceMatrixImpl implements IncidenceMatrix {
+public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
     //tenho que fazer minha implementação de map
     private Map<Vertice, List<Byte>> matrix;
 
@@ -14,8 +14,8 @@ public class IncidenceMatrixImpl implements IncidenceMatrix {
     }
 
 //todo mudar esse nome, pois fica ambiguo
-    @Override
-    public void addVertice(String input, byte b1, byte b2) {
+
+    protected void addVertice(String input, byte b1, byte b2) {
         try {
             String[] labels = transformInput(input);
             //aqui eu garanto que o vertice comece a existir
