@@ -1,9 +1,12 @@
 import structure.IncidenceMatrix;
 import structure.IncidenceMatrixDirected;
+import structure.IncidenceMatrixUndirected;
 
 public class Main {
     public static void main(String[] args) {
-        IncidenceMatrix im = new IncidenceMatrixDirected();
+        //TODO realizar o teste
+        IncidenceMatrix imd = new IncidenceMatrixDirected();
+        IncidenceMatrix imu = new IncidenceMatrixUndirected();
         /* //teste com 15 entradas
         im.addVertice("A,B", (byte)1,(byte)1);
         im.addVertice("A,D", (byte)1,(byte)1);
@@ -80,7 +83,8 @@ public class Main {
         im.addVertice("O,Q", (byte)1, (byte)1);
         im.addVertice("P,R", (byte)1, (byte)1);*/
 
-        System.out.println(im);
+        System.out.println(imu);
+        System.out.println(imd);
 
     }
 }

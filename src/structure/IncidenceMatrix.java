@@ -12,6 +12,5 @@ import graph.Vertice;
 // Para nao direcionados usar BitSet 0, 1
 //Para direcionados usar List<byte> -1, 0, 1
 public interface  IncidenceMatrix{
-    //todo voltar para receber apenas content no parametro
     void addVertice(String content);
 }
