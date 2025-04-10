@@ -1,6 +1,6 @@
 package structure;
 
-public class IncidenteMatrixUndirected extends IncidenceMatrixImpl {
+public class IncidenceMatrixUndirected extends IncidenceMatrixImpl {
     @Override
     public void addVertice(String content) {
         this.addVertice(content, (byte) 1, (byte) 1);

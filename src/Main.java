@@ -1,11 +1,9 @@
 import structure.IncidenceMatrix;
-import structure.IncidenceMatrixImpl;
-
-import java.util.*;
+import structure.IncidenceMatrixDirected;
 
 public class Main {
     public static void main(String[] args) {
-        IncidenceMatrix im = new IncidenceMatrixImpl();
+        IncidenceMatrix im = new IncidenceMatrixDirected();
         /* //teste com 15 entradas
         im.addVertice("A,B", (byte)1,(byte)1);
         im.addVertice("A,D", (byte)1,(byte)1);
