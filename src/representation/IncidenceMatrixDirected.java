@@ -1,4 +1,4 @@
-package structure;
+package representation;
 
 public class IncidenceMatrixDirected extends IncidenceMatrixImpl {
     @Override

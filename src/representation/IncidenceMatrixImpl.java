@@ -1,4 +1,4 @@
-package structure;
+package representation;
 
 
 import graph.Vertice;
