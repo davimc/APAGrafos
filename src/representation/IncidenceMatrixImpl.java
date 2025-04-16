@@ -10,12 +10,12 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
     private Map<Vertice, List<Byte>> matrix;
 
     public IncidenceMatrixImpl() {
-        matrix = new HashMap<>();
+        matrix = new LinkedHashMap<>();
     }
 
 //todo mudar esse nome, pois fica ambiguo
 
-    protected void addVertice(String input, byte b1, byte b2) {
+    protected void addVertice(String input, byte b2) {
         try {
             String[] labels = transformInput(input);
             //aqui eu garanto que o vertice comece a existir
@@ -24,7 +24,7 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
             matrix.keySet().forEach((v) -> {
                 if (v.label().equals(labels[0]) || v.label().equals(labels[1]))
                     //todo problema com dupla adição
-                    matrix.get(v).add( (v.label().equals(labels[0]) ? b1 : b2));
+                    matrix.get(v).add( (v.label().equals(labels[0]) ? (byte) 1 : b2));
 
                 else
                     matrix.get(v).add((byte) 0);
@@ -32,7 +32,7 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
 
             });
         }catch (IllegalArgumentException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
@@ -50,9 +50,9 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
                 .filter(v -> v.label().equals(labels[0]) || v.label().equals(labels[1])).toList();
         if(verticeList.isEmpty()) {
             //se for vazio, não entre, caso contrário, imite o tamanho dos que já existem
-            int size =  matrix.size() == 0 ?
-                    matrix.size() :
-                    matrix.values().stream().findFirst().get().size();
+            int size = matrix.isEmpty() ?
+                    0 : matrix.values().stream().findFirst().get().size();
+
             List<Byte> newList1 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
             List<Byte> newList2 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
 
