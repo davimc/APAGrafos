@@ -1,17 +1,31 @@
-import structure.IncidenceMatrix;
-import structure.IncidenceMatrixDirected;
-import structure.IncidenceMatrixUndirected;
+import representation.IncidenceMatrix;
+import representation.IncidenceMatrixDirected;
+import representation.IncidenceMatrixUndirected;
+import representation.RepresentationEnum;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         //TODO realizar o teste
-        IncidenceMatrix imd = new IncidenceMatrixDirected();
-        IncidenceMatrix imu = new IncidenceMatrixUndirected();
+
+        IncidenceMatrix imd = RepresentationEnum.convertion("D");
+        IncidenceMatrix imu = RepresentationEnum.convertion("ND");;
+        System.out.println(imd instanceof IncidenceMatrixDirected);
+        System.out.println(imd instanceof IncidenceMatrixUndirected);
+        System.out.println(imu instanceof IncidenceMatrixUndirected);
+        System.out.println(imu instanceof IncidenceMatrixDirected);
+
+
+        imu.addVertice("A,B");
+        imu.addVertice("A,D");
+        imu.addVertice("B,D");
+        imu.addVertice("E,F");
+
+        System.out.println(imu.get);
         /* //teste com 15 entradas
-        im.addVertice("A,B", (byte)1,(byte)1);
-        im.addVertice("A,D", (byte)1,(byte)1);
-        im.addVertice("B,D", (byte)1,(byte)1);
-        im.addVertice("E,F", (byte)1,(byte)1);
         im.addVertice("E,H", (byte)1,(byte)1);
         im.addVertice("F,G", (byte)1,(byte)1);
         im.addVertice("G,B", (byte)1,(byte)1);
@@ -83,8 +97,8 @@ public class Main {
         im.addVertice("O,Q", (byte)1, (byte)1);
         im.addVertice("P,R", (byte)1, (byte)1);*/
 
-        System.out.println(imu);
-        System.out.println(imd);
+/*        System.out.println(imu);
+        System.out.println(imd);*/
 
     }
 }

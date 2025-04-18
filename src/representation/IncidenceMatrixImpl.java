@@ -15,7 +15,17 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
 
 //todo mudar esse nome, pois fica ambiguo
 
-    protected void addVertice(String input, byte b2) {
+    @Override
+    public Vertice getFirstVertice() {
+        return matrix.keySet().stream().findFirst().orElseThrow(()-> new IllegalArgumentException("The matrix is empty"));
+    }
+
+    @Override
+    public List<Byte> getEdges(Vertice vertice) {
+        return matrix.get(vertice);
+    }
+
+    protected void verticeEdgeEntry(String input, byte b2) {
         try {
             String[] labels = transformInput(input);
             //aqui eu garanto que o vertice comece a existir
@@ -36,6 +46,18 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
         }
     }
 
+    @Override
+    public Vertice getNext(Vertice actual) {
+        boolean flag = false;
+
+        for(Vertice v : matrix.keySet()) {
+            if (flag)
+                return v;
+            if (v.equals(actual))
+                flag = true;
+        }
+        return null;
+    }
 
     private String[] transformInput(String input) throws IllegalArgumentException {
         String[] labels = input.split(",");
@@ -71,12 +93,19 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
         }
     }
 
+
+    @Override
+    public int size() {
+        return matrix.values().stream().findFirst()
+                .orElseThrow(EmptyStackException::new).size();
+    }
+
     @Override
     public String toString() {
 
         StringBuffer sb = new StringBuffer();
         sb.append("IncidenceMatrixImpl{");
-        matrix.forEach((v,l)-> {
+        matrix.forEach((v, l)-> {
             sb.append("\n" + v.label() + l + "\t " + l.size());
         });
         sb.append("\n}");
