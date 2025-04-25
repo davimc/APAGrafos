@@ -1,6 +1,8 @@
 package challenge;
 
+import representation.IncidenceMatrix;
+
 public interface ConnectedComponents {
 
-    boolean isConnected();
+    void isConnected(IncidenceMatrix matrix);
 }
