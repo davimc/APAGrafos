@@ -19,6 +19,10 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
     public Vertice getFirstVertice() {
         return matrix.keySet().stream().findFirst().orElseThrow(()-> new IllegalArgumentException("The matrix is empty"));
     }
+    @Override
+    public List<Vertice> getVertices() {
+        return matrix.keySet().stream().toList();
+    }
 
     @Override
     public List<Byte> getEdges(Vertice vertice) {
@@ -72,8 +76,7 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
                 .filter(v -> v.label().equals(labels[0]) || v.label().equals(labels[1])).toList();
         if(verticeList.isEmpty()) {
             //se for vazio, não entre, caso contrário, imite o tamanho dos que já existem
-            int size = matrix.isEmpty() ?
-                    0 : matrix.values().stream().findFirst().get().size();
+            int size = matrix.values().stream().findFirst().orElse(new ArrayList<Byte>()).size();
 
             List<Byte> newList1 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
             List<Byte> newList2 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
@@ -98,6 +101,11 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
     public int size() {
         return matrix.values().stream().findFirst()
                 .orElseThrow(EmptyStackException::new).size();
+    }
+
+    @Override
+    public int order() {
+        return matrix.size();
     }
 
     @Override
