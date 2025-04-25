@@ -33,9 +33,10 @@ public class DepthFirstSearch {
             if (matrix.getEdges(currentVertice).get(j) == (byte) 1) {
                 for (int i = 0; i < vertices.size(); i++) {
                     Vertice v = vertices.get(i);
+                    //todo transformar a comparação em != 0, pois se for -1, ele deve entrar também
                     if(v != currentVertice && matrix.getEdges(v).get(j).equals((byte) 1) && !visited[i]) {
-
-                        //System.out.println(currentVertice.label() + " " + matrix.getEdges(currentVertice) + " " + j + ", " + i + visited[i]);
+                        //todo if( == -1) dfs... else dfs -> se o local for 0 e tiver -1, tudo bem. Caso contrário tem que priorizar 1
+                        //talvez essa lógica esteja torta kk
                         dsf(i, vertices.get(i), matrix, visited);
                     }
                 }

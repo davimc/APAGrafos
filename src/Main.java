@@ -1,3 +1,4 @@
+import challenge.ConnectedComponentsImpl;
 import representation.IncidenceMatrix;
 import representation.IncidenceMatrixDirected;
 import representation.IncidenceMatrixUndirected;
@@ -9,22 +10,22 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //TODO realizar o teste
 
         IncidenceMatrix imd = RepresentationEnum.convertion("D");
         IncidenceMatrix imu = RepresentationEnum.convertion("ND");;
-        System.out.println(imd instanceof IncidenceMatrixDirected);
-        System.out.println(imd instanceof IncidenceMatrixUndirected);
-        System.out.println(imu instanceof IncidenceMatrixUndirected);
-        System.out.println(imu instanceof IncidenceMatrixDirected);
-
 
         imu.addVertice("A,B");
         imu.addVertice("A,D");
         imu.addVertice("B,D");
-        imu.addVertice("E,F");
+        imu.addVertice("G,F");
+        imu.addVertice("F,A");
+//TODO transformar array visited em list de bytes
+        //se houver 0, ele é não conectado
+        // senão e houver -1 ele é fracamente conectado
+        // senão ele é conectado
+        // TODO 2  a resposta de conectado colocar na matriz de incidência, para cada tipo tratar a sua resposta
 
-        System.out.println(imu.get);
+        new ConnectedComponentsImpl().isConnected(imu);
         /* //teste com 15 entradas
         im.addVertice("E,H", (byte)1,(byte)1);
         im.addVertice("F,G", (byte)1,(byte)1);
