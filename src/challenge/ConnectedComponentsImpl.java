@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ConnectedComponentsImpl implements ConnectedComponents {
+public class ConnectedComponentsImpl implements ConnectedComponents {
     //private IncidenceMatrix graph;
 
-    protected List<Vertice> visitPaths(IncidenceMatrix matrix) {
-        List<Byte> edges = new ArrayList<>(Collections.nCopies(matrix.size(), (byte) 0));
+    public void isConnected(IncidenceMatrix matrix) {
+
+        DepthFirstSearch.connectedDfSearch(matrix);
 
 
-        return null;
+        return;
     }
-
-
 }
