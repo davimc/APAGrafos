@@ -1,18 +1,11 @@
-import challenge.ConnectedComponentsImpl;
 import representation.IncidenceMatrix;
-import representation.IncidenceMatrixDirected;
-import representation.IncidenceMatrixUndirected;
-import representation.RepresentationEnum;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import representation.enums.RepresentationEnum;
 
 public class Main {
     public static void main(String[] args) {
 
-        IncidenceMatrix imd = RepresentationEnum.convertion("D");
-        IncidenceMatrix imu = RepresentationEnum.convertion("ND");;
+        IncidenceMatrix imd = RepresentationEnum.toEnum("D");
+        IncidenceMatrix imu = RepresentationEnum.toEnum("ND");;
 
         imu.addVertice("A,B");
         imu.addVertice("A,D");
@@ -25,7 +18,8 @@ public class Main {
         // senão ele é conectado
         // TODO 2  a resposta de conectado colocar na matriz de incidência, para cada tipo tratar a sua resposta
 
-        new ConnectedComponentsImpl().isConnected(imu);
+        System.out.println(imu.isConnected());
+
         /* //teste com 15 entradas
         im.addVertice("E,H", (byte)1,(byte)1);
         im.addVertice("F,G", (byte)1,(byte)1);

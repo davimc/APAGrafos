@@ -2,7 +2,11 @@ package challenge;
 
 import representation.IncidenceMatrix;
 
+import java.util.List;
+
 public interface ConnectedComponents {
 
-    void isConnected(IncidenceMatrix matrix);
+    static List<Byte> isConnected(IncidenceMatrix matrix) {
+        return DepthFirstSearch.connectedDfSearch(matrix);
+    }
 }

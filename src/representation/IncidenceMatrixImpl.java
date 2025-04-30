@@ -1,6 +1,7 @@
 package representation;
 
 
+import challenge.ConnectedComponents;
 import graph.Vertice;
 
 import java.util.*;
@@ -8,12 +9,22 @@ import java.util.*;
 public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
     //tenho que fazer minha implementação de map
     private Map<Vertice, List<Byte>> matrix;
+    private List<Byte> isConnected;
 
     public IncidenceMatrixImpl() {
         matrix = new LinkedHashMap<>();
+        isConnected = new ArrayList<>();
     }
 
-//todo mudar esse nome, pois fica ambiguo
+    protected List<Byte> checkConnection() {
+        if (isConnected.size() != size())
+            isConnected = ConnectedComponents.isConnected(this);
+        System.out.println(isConnected);
+        List list = isConnected.stream().filter(a -> a != (byte) 1).toList();
+        System.out.println(list);
+        return list;
+
+    }
 
     @Override
     public Vertice getFirstVertice() {

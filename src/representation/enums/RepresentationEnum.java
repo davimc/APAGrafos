@@ -1,4 +1,8 @@
-package representation;
+package representation.enums;
+
+import representation.IncidenceMatrix;
+import representation.IncidenceMatrixDirected;
+import representation.IncidenceMatrixUndirected;
 
 public enum RepresentationEnum {
 
@@ -20,7 +24,7 @@ public enum RepresentationEnum {
         return representation;
     }
 
-    public static IncidenceMatrix convertion(String cod) {
+    public static IncidenceMatrix toEnum(String cod) {
         if(cod == null) return null;
 
         for(RepresentationEnum r: RepresentationEnum.values())
