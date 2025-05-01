@@ -16,6 +16,5 @@ public interface  IncidenceMatrix{
     List<Byte> getEdges(Vertice vertice);
     Vertice getFirstVertice();
     void addVertice(String content);
-    Vertice getNext(Vertice current);
 
 }

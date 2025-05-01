@@ -19,9 +19,7 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
     protected List<Byte> checkConnection() {
         if (isConnected.size() != size())
             isConnected = ConnectedComponents.isConnected(this);
-        System.out.println(isConnected);
         List list = isConnected.stream().filter(a -> a != (byte) 1).toList();
-        System.out.println(list);
         return list;
 
     }
@@ -61,18 +59,7 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
         }
     }
 
-    @Override
-    public Vertice getNext(Vertice actual) {
-        boolean flag = false;
 
-        for(Vertice v : matrix.keySet()) {
-            if (flag)
-                return v;
-            if (v.equals(actual))
-                flag = true;
-        }
-        return null;
-    }
 
     private String[] transformInput(String input) throws IllegalArgumentException {
         String[] labels = input.split(",");
