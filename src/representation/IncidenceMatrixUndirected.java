@@ -18,4 +18,9 @@ public class IncidenceMatrixUndirected extends IncidenceMatrixImpl {
         return TypeConnection.toEnum(checkConnection().isEmpty() ? CONNECTED : NOT_CONNECTED);
 
     }
+
+    @Override
+    public boolean isDirected() {
+        return false;
+    }
 }
