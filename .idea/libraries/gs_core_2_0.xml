@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="gs-core-2.0">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Downloads/openjfx-24.0.1_linux-aarch64_bin-sdk/javafx-sdk-24.0.1/lib" />
+      <root url="file://$USER_HOME$/Downloads/openjfx-24.0.1_linux-aarch64_bin-sdk/javafx-sdk-24.0.1/lib" />
+      <root url="jar://$USER_HOME$/Downloads/gs-core-2.0.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/gs-ui-swing-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$USER_HOME$/Downloads/openjfx-24.0.1_linux-aarch64_bin-sdk/javafx-sdk-24.0.1/lib" />
+    </NATIVE>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/gs-ui-swing-2.0.jar!/" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/openjfx-24.0.1_linux-aarch64_bin-sdk/javafx-sdk-24.0.1/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/openjfx-24.0.1_linux-aarch64_bin-sdk/javafx-sdk-24.0.1/lib" recursive="false" />
+  </library>
+</component>
