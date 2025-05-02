@@ -52,7 +52,7 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
 
     @Override
     public List<Vertice> findNeighbors(Vertice v) {
-        return DepthFirstSearch.findNeighbors(v, this);
+        return DepthFirstSearch.DFSearchNeighbors(v, this);
     }
 
     @Override
