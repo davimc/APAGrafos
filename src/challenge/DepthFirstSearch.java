@@ -6,15 +6,15 @@ import representation.IncidenceMatrix;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 
 public class DepthFirstSearch {
     private static final byte NOT_VISITED = (byte) 0;
+    private static final byte NOT_CONNECTED = (byte) 0;
     private static final byte CONNECTED = (byte) 1;
     private static final byte WEAKLY_CONNECTED = (byte) -1;
 
-    public static List<Byte> connectedDfSearch(IncidenceMatrix matrix) {
+    public static List<Byte> connectedDFSearch(IncidenceMatrix matrix) {
         Vertice first = matrix.getFirstVertice();
         List<Byte> visited = new ArrayList<>(Collections.nCopies(matrix.order(), NOT_VISITED));
         dsf(0, first, matrix,visited);
@@ -33,13 +33,25 @@ public class DepthFirstSearch {
                 visited.set(currentVerticeIndex, payVisit(matrix.getEdges(currentVertice).get(j), visited.get(currentVerticeIndex)));
                 for (int i = 0; i < vertices.size(); i++) {
                     Vertice v = vertices.get(i);
-                    if(v != currentVertice && !matrix.getEdges(v).get(j).equals(NOT_VISITED) && visited.get(i) == NOT_VISITED) {
+                    if(v != currentVertice && !matrix.getEdges(v).get(j).equals(NOT_CONNECTED) && visited.get(i) == NOT_VISITED) {
                         dsf(i, vertices.get(i), matrix, visited);
                     }
                 }
             }
         }
+    }
 
+    public static List<Vertice> DFSearchNeighbors(Vertice v, IncidenceMatrix m) {
+        List<Vertice> neighbors = new ArrayList<>();
+        for (int i = 0; i < m.getEdges(v).size(); i++) {
+            byte b = m.getEdges(v).get(i);
+            if(b == CONNECTED)
+                for (Vertice neighbor: m.getVertices()) {
+                    if (neighbor != v && !m.getEdges(neighbor).get(i).equals(NOT_CONNECTED))
+                        neighbors.add(neighbor);
+                }
+        }
+        return neighbors;
     }
 
     private static Byte payVisit(byte value, byte current) {
