@@ -21,4 +21,9 @@ public class IncidenceMatrixDirected extends IncidenceMatrixImpl {
            c = b.stream().anyMatch(x -> x == WEAKLEY_CONNECTED) ? WEAKLEY_CONNECTED : NOT_CONNECTED;
        return TypeConnection.toEnum(c);
     }
+
+    @Override
+    public boolean isDirected() {
+        return true;
+    }
 }

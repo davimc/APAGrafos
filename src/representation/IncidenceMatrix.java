@@ -11,8 +11,12 @@ public interface  IncidenceMatrix{
 
     int size(); // qtt edges
     int order(); //qtt vertices
+    Vertice getVertice(String label);
     List<Vertice> getVertices();
+    boolean isDirected();
     String isConnected();
+    List<Vertice> findNeighbors(Vertice v);
+    int calculateVertexDegree(Vertice v);
     List<Byte> getEdges(Vertice vertice);
     Vertice getFirstVertice();
     void addVertice(String content);
