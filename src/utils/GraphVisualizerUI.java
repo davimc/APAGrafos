@@ -31,7 +31,8 @@ public class GraphVisualizerUI {
                 }
             }
 
-            graph.addEdge(inputs[0] + inputs[1], inputs[0], inputs[1], isDirected);
+            Edge e= graph.addEdge(inputs[0] + inputs[1], inputs[0], inputs[1], isDirected);
+            e.setAttribute("ui.label", inputs[0] + "-" + inputs[1]);
         });
 
     }

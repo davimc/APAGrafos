@@ -2,10 +2,9 @@ package challenge;
 
 import graph.Vertice;
 import representation.IncidenceMatrix;
+import representation.IncidenceMatrixImpl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class DepthFirstSearch {
@@ -40,8 +39,22 @@ public class DepthFirstSearch {
             }
         }
     }
-
-    public static List<Vertice> DFSearchNeighbors(Vertice v, IncidenceMatrix m) {
+    //todo visitar todos as arestas
+    /*public static void dFSearchVisit(int currentVerticeIndex, Vertice currentVertice,IncidenceMatrix matrix, List<Byte> visited) {
+        for(int j = 0; j < qttEdges; j++) {
+            //if (matrix.getEdges(currentVertice).get(j) == (byte) 1) {
+            if (matrix.getEdges(currentVertice).get(j) != NOT_VISITED) {
+                visited.set(currentVerticeIndex, payVisit(matrix.getEdges(currentVertice).get(j), visited.get(currentVerticeIndex)));
+                for (int i = 0; i < vertices.size(); i++) {
+                    Vertice v = vertices.get(i);
+                    if(v != currentVertice && !matrix.getEdges(v).get(j).equals(NOT_CONNECTED) && visited.get(i) == NOT_VISITED) {
+                        dsf(i, vertices.get(i), matrix, visited);
+                    }
+                }
+            }
+        }
+    }*/
+    public static List<Vertice> dFSearchNeighbors(Vertice v, IncidenceMatrix m) {
         List<Vertice> neighbors = new ArrayList<>();
         for (int i = 0; i < m.getEdges(v).size(); i++) {
             byte b = m.getEdges(v).get(i);
@@ -56,6 +69,27 @@ public class DepthFirstSearch {
 
     private static Byte payVisit(byte value, byte current) {
         return current != 1 ? value : CONNECTED;
+    }
+
+    //será uma visita em largura
+    public static String dFSearchVisitAllEdges(IncidenceMatrix matrix, Set<Vertice> visited) {
+        StringBuilder sBuilder = new StringBuilder("Arestas visitadas: ");
+        for (Vertice v : matrix.getVertices()) {
+            if (!visited.contains(v)) {
+                visited.add(v);
+                for (int j = 0; j < matrix.getEdges(v).size(); j++)
+                    if (matrix.getEdges(v).get(j) == CONNECTED)
+                        for (Vertice n: matrix.getVertices())
+                            if (n != v && matrix.getEdges(n).get(j) != NOT_CONNECTED) {
+                                sBuilder.append(v + " visitou vizinho " + n);
+                                break;
+                            }
+
+
+            }
+
+        }
+        return sBuilder.toString();
     }
 
     private Integer[] getStartAndEndIndex(List<Byte> firstVertice) {

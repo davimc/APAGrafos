@@ -1,5 +1,6 @@
 package representation;
 
+import graph.Vertice;
 import representation.enums.TypeConnection;
 
 import java.util.List;
@@ -25,5 +26,12 @@ public class IncidenceMatrixDirected extends IncidenceMatrixImpl {
     @Override
     public boolean isDirected() {
         return true;
+    }
+
+    @Override
+    public String calculateVertexDegree(Vertice v) {
+        List<Byte> edges =  super.listVertexDegree(v);
+        int exit = edges.stream().filter(e -> e == (byte) 1).toList().size();
+        return "Grau de saída = " + exit + "\nGrau de entrada = " + (edges.size() - exit);
     }
 }

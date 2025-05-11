@@ -1,0 +1,11 @@
+ND
+A,B
+B,C
+C,D
+D,A
+E,F
+F,G
+G,E
+H,I
+J,K
+

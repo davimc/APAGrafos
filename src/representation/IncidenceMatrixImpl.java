@@ -1,7 +1,7 @@
 package representation;
 
 
-import challenge.ConnectedComponents;
+import challenge.ChallengeComponents;
 import challenge.DepthFirstSearch;
 import graph.Vertice;
 import utils.InputBuilder;
@@ -18,17 +18,15 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
         isConnected = new ArrayList<>();
     }
 
-    protected List<Byte> checkConnection() {
-        if (isConnected.size() != size())
-            isConnected = ConnectedComponents.isConnected(this);
-        List list = isConnected.stream().filter(a -> a != (byte) 1).toList();
-        return list;
-
+    @Override
+    public int size() {
+        return matrix.values().stream().findFirst()
+                .orElseThrow(EmptyStackException::new).size();
     }
 
     @Override
-    public Vertice getFirstVertice() {
-        return matrix.keySet().stream().findFirst().orElseThrow(()-> new IllegalArgumentException("The matrix is empty"));
+    public int order() {
+        return matrix.size();
     }
 
     @Override
@@ -39,11 +37,18 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
             }
         throw new IllegalArgumentException("Este vertice não está presente");
     }
-
     @Override
     public List<Vertice> getVertices() {
         return matrix.keySet().stream().toList();
     }
+    @Override
+    public Vertice getFirstVertice() {
+        return matrix.keySet().stream().findFirst().orElseThrow(()-> new IllegalArgumentException("The matrix is empty"));
+    }
+
+
+
+
 
     @Override
     public List<Byte> getEdges(Vertice vertice) {
@@ -52,13 +57,29 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
 
     @Override
     public List<Vertice> findNeighbors(Vertice v) {
-        return DepthFirstSearch.DFSearchNeighbors(v, this);
+        return DepthFirstSearch.dFSearchNeighbors(v, this);
     }
 
     @Override
-    public int calculateVertexDegree(Vertice v) {
-        return this.getEdges(v).stream().filter(e -> e != (byte) 0).toList().size();
+    public boolean isAdjacent(Vertice v, Vertice n) {
+        List<Byte> edge = matrix.get(v);
+        List<Byte> edgeNeighbor = matrix.get(n);
+
+        for(int i = 0; i < edge.size(); i++)
+            if (edge.get(i) != 0 && edgeNeighbor.get(i) != 0)
+                return true;
+        return false;
     }
+
+    @Override
+    public String visitAllEdges(Set<Vertice> visited) {
+        return DepthFirstSearch.dFSearchVisitAllEdges(this, visited);
+    }
+
+    protected List<Byte> listVertexDegree(Vertice v) {
+        return this.getEdges(v).stream().filter(e -> e != (byte) 0).toList();
+    }
+
 
     protected void verticeEdgeEntry(String input, byte b2) {
         try {
@@ -83,9 +104,9 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
     private void checkVertice(String[] labels) {
         List<Vertice> verticeList = matrix.keySet().stream()
                 .filter(v -> v.label().equals(labels[0]) || v.label().equals(labels[1])).toList();
+
         if(verticeList.isEmpty()) {
             //se for vazio, não entre, caso contrário, imite o tamanho dos que já existem
-            System.out.println("Adicionando vertices " + labels[0] + " e " + labels[1]);
             int size = matrix.values().stream().findFirst().orElse(new ArrayList<Byte>()).size();
 
             List<Byte> newList1 = new ArrayList<>(Collections.nCopies(size, (byte) 0));
@@ -105,18 +126,15 @@ public abstract class IncidenceMatrixImpl implements IncidenceMatrix {
                     new ArrayList<>(Collections.nCopies(size, (byte) 0)));
         }
     }
+    protected List<Byte> checkConnection() {
+        if (isConnected.size() != size())
+            isConnected = ChallengeComponents.isConnected(this);
+        List list = isConnected.stream().filter(a -> a != (byte) 1).toList();
+        return list;
 
-
-    @Override
-    public int size() {
-        return matrix.values().stream().findFirst()
-                .orElseThrow(EmptyStackException::new).size();
     }
 
-    @Override
-    public int order() {
-        return matrix.size();
-    }
+
 
     @Override
     public String toString() {

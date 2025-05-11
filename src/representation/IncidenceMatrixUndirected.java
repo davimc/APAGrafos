@@ -1,5 +1,6 @@
 package representation;
 
+import graph.Vertice;
 import representation.enums.TypeConnection;
 
 public class IncidenceMatrixUndirected extends IncidenceMatrixImpl {
@@ -22,5 +23,11 @@ public class IncidenceMatrixUndirected extends IncidenceMatrixImpl {
     @Override
     public boolean isDirected() {
         return false;
+    }
+
+    @Override
+    public String calculateVertexDegree(Vertice v) {
+        int degree = super.listVertexDegree(v).size();
+        return "Grau do Vertice " + v.label() + ": " + degree;
     }
 }
