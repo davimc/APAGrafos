@@ -22,7 +22,7 @@ public class Main {
 
         SwingUtilities.invokeLater(() -> {
             ChallengePresenterUI gui = new ChallengePresenterUI(im);
-            gui.setVisible(true);
+            gui.setVisible(true );
         });
     }
 }
